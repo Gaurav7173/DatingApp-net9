@@ -5,6 +5,9 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { authGuard } from './_guards/auth.guard';
+import { TestsErrorsComponent } from './errors/tests-errors/tests-errors.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 export const routes: Routes = [
     {path: '', component:HomeComponent},
@@ -21,8 +24,9 @@ export const routes: Routes = [
 
         ]
     },
-
-    
+    {path:'errors', component:TestsErrorsComponent},
+    {path:'not-found', component:NotFoundComponent},
+    {path:'server-error', component:ServerErrorComponent}, // lazy loading the errors component 
     {path: '**', component:HomeComponent,pathMatch:'full' } // wildcard route to redirect to home if no other route matches,
     
 ];

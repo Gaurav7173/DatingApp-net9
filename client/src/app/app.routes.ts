@@ -18,7 +18,7 @@ export const routes: Routes = [
         children: [
 
     {path: 'members', component:MemberListComponent}, // canActivate: [authGuard] is used to protect the route, only logged in users can access it  
-    {path: 'members/:id', component:MemberDetailComponent},
+    {path: 'members/:username', component:MemberDetailComponent},
     {path: 'lists', component:ListsComponent},
     {path: 'messages', component:MessagesComponent},
 

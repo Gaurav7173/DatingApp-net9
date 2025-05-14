@@ -50,10 +50,13 @@ public class UsersController(IUserRepository userRepository,IMapper mapper,IPhot
       if(user==null) return BadRequest("cannot update user");
       var result=await photoService.AddPhotoAsync(file);
       if(result.Error!=null) return BadRequest(result.Error.Message);
+
       var photo=new Photo{
          Url=result.SecureUrl.AbsoluteUri,
          PublicId=result.PublicId
       };
+      if(user.Photos.Count==0)photo.IsMain=true;
+
       user.Photos.Add(photo);
       if(await userRepository.SaveAllAsync()) 
       return CreatedAtAction(nameof(GetUser),

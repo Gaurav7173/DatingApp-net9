@@ -8,6 +8,7 @@ import { errorInterceptor } from './_interceptors/error.interceptor';
 import { jwtInterceptor } from './_interceptors/jwt.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './__interceptors/loading.interceptor';
+import { TimeagoClock, TimeagoModule } from 'ngx-timeago';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,6 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-bottom-right'
 
     }),
-    importProvidersFrom(NgxSpinnerModule)
+    importProvidersFrom(NgxSpinnerModule,TimeagoModule.forRoot())
   ]
 };

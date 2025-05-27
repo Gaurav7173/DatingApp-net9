@@ -10,6 +10,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { preventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { authGuard } from './_guards/auth.guard';
+import { memberDetailedResolver } from './_resolvers/member-detailed.resolver';
 
 export const routes: Routes = [
     {path: '', component:HomeComponent},
@@ -20,7 +21,8 @@ export const routes: Routes = [
         children: [
 
     {path: 'members', component:MemberListComponent}, // canActivate: [authGuard] is used to protect the route, only logged in users can access it  
-    {path: 'members/:username', component:MemberDetailComponent},
+    {path: 'members/:username', component:MemberDetailComponent,
+        resolve: {member: memberDetailedResolver}}, // resolve the member data before the component is loaded
     {path: 'member/edit', component:MemberEditComponent,
         canDeactivate: [preventUnsavedChangesGuard]}, // canDeactivate: [preventUnsavedChangesGuard] is used to prevent unsaved changes when navigating away from the route
     {path: 'lists', component:ListsComponent},

@@ -23,7 +23,9 @@ IMapper mapper) : BaseApiController
             return BadRequest("You cannot send messages to yourself");
         var sender = await userRepository.GetUserByUsernameAsync(username);
         var recipient = await userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
-        if (recipient == null || sender == null) return BadRequest("cannot send message at this time");
+
+        if (recipient == null || sender == null|| sender.UserName == null || recipient.UserName == null)
+            return BadRequest("cannot send message at this time");
         var message = new Message
         {
             Sender = sender,
